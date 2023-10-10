@@ -1,35 +1,20 @@
 const butInstall = document.getElementById("buttonInstall");
 
-window.addEventListener('beforeinstallprompt', (event) => {
-
-console.log('Before Install Prompt Event:', event);
-
-window.deferredPrompt = event;
-
-console.log('Install Prompt Prevented. Deferred Prompt:', window.deferredPrompt);
-
-butInstall.classList.toggle('hidden', false);
-console.log('Button Install Element Visibility Toggled:', !butInstall.classList.contains('hidden'));
+// Logic for installing the PWA
+// TODO: Add an event handler to the `beforeinstallprompt` event
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  butInstall.style.visibility = "visible";
+  butInstall.textContent = "Install!";
 });
 
-    butInstall.addEventListener('click', async () => {
-    const promptEvent = window.deferredPrompt;
-    if (!promptEvent) {
-        console.warn('No Deferred Prompt available.');
-        return;
-    }
-    console.log('Button Install Clicked. Prompting Install:', promptEvent);
-    promptEvent.prompt();
-    // Reset the deferred prompt variable, it can only be used once.
-    window.deferredPrompt = null;
-
-    console.log('Deferred Prompt Reset. Deferred Prompt:', window.deferredPrompt);
-    butInstall.classList.toggle('hidden', true);
-    console.log('Button Install Element Visibility Toggled:', butInstall.classList.contains('hidden'));
+// TODO: Implement a click event handler on the `butInstall` element
+butInstall.addEventListener("click", async () => {
+  butInstall.setAttribute("disabled", true);
+  butInstall.textContent = "Installed!";
 });
-    window.addEventListener('appinstalled', (event) => {
-    // Clear the stored prompt event after the app is successfully installed
-    console.log('App Installed Event:', event);
-    window.deferredPrompt = null;
-    console.log('Deferred Prompt Reset on App Installed. Deferred Prompt:', window.deferredPrompt);
+
+// TODO: Add an handler for the `appinstalled` event
+window.addEventListener("appinstalled", (event) => {
+  console.log("appinstalled", event);
 });
