@@ -42,7 +42,7 @@ This project is licensed under the [![License: MIT](https://img.shields.io/badge
 ##Screenshot
 
 <img
-  src="assets\assets\PWA.png"
+  src="assets\PWA.png"
   alt="PWA"
   style="display: left; margin: 0 auto; max-width: 500px">
 
