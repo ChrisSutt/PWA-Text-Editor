@@ -1,40 +1,39 @@
-// Get the reference to the install button
-const installButton = document.getElementById("buttonInstall");
-
+const butInstall = document.getElementById("buttonInstall");
 
 window.addEventListener('beforeinstallprompt', (event) => {
-    // Prevent the default behavior of the install prompt
+    console.log('Before Install Prompt Event:', event);
+    
     event.preventDefault();
-
-    // Store the event for later use
     window.deferredPrompt = event;
-
-    // Show the install button by removing the 'hidden' class
-    installButton.classList.toggle('hidden', false);
+    
+    console.log('Install Prompt Prevented. Deferred Prompt:', window.deferredPrompt);
+    
+    butInstall.classList.toggle('hidden', false);
+    console.log('Button Install Element Visibility Toggled:', !butInstall.classList.contains('hidden'));
 });
 
-
-installButton.addEventListener('click', async () => {
-    // Retrieve the stored prompt event
+butInstall.addEventListener('click', async () => {
     const promptEvent = window.deferredPrompt;
-    
-    // Check if the prompt event is available
+
     if (!promptEvent) {
+        console.warn('No Deferred Prompt available.');
         return;
     }
 
-    // Display the installation prompt to the user
+    console.log('Button Install Clicked. Prompting Install:', promptEvent);
     promptEvent.prompt();
 
-    // Reset the deferred prompt variable as it can only be used once
+    // Reset the deferred prompt variable, it can only be used once.
     window.deferredPrompt = null;
+    
+    console.log('Deferred Prompt Reset. Deferred Prompt:', window.deferredPrompt);
 
-    // Hide the install button after the prompt is shown
-    installButton.classList.toggle('hidden', true);
+    butInstall.classList.toggle('hidden', true);
+    console.log('Button Install Element Visibility Toggled:', butInstall.classList.contains('hidden'));
 });
 
-
 window.addEventListener('appinstalled', (event) => {
-    // Clear the stored prompt event after the app is successfully installed
+    console.log('App Installed Event:', event);
     window.deferredPrompt = null;
+    console.log('Deferred Prompt Reset on App Installed. Deferred Prompt:', window.deferredPrompt);
 });
