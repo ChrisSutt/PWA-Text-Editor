@@ -2,14 +2,14 @@
 
 JATE Text Editor is a simple yet powerful text editor designed to provide a seamless writing experience. This Progressive Web App (PWA) allows you to use JATE as a standalone application on various devices, with offline capabilities and easy installation.
 
-```/*
+```
        _____  ____________
       / /   |/_  __/ ____/
  __  / / /| | / / / __/   
 / /_/ / ___ |/ / / /___   
  ____/_/  |_/_/ /_____/   
 just another text editor
-*/ ```
+```
 
 ## Table of Contents
 - [Installation](#installation)
