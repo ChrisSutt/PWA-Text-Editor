@@ -6,7 +6,9 @@ const { InjectManifest } = require('workbox-webpack-plugin');
 
 module.exports = () => {
   return {
+    // Set the build mode to development
     mode: 'development',
+    // Entry points for your application
     entry: {
       main: './src/js/index.js',
       install: './src/js/install.js',
@@ -14,22 +16,24 @@ module.exports = () => {
       editor: './src/js/editor.js',
       header: './src/js/header.js',
     },
+    // Output configuration
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
     },
+    // List of plugins used by webpack
     plugins: [
-
+      // Generates an HTML file to serve your bundles
       new HtmlWebpackPlugin({
         template: './index.html',
         title: 'JATE'
       }),
-
+      // Injects a service worker into your build
       new InjectManifest({
         swSrc: './src-sw.js',
         swDest: 'src-sw.js',
       }),
-
+      // Generates a web app manifest file for PWAs
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
@@ -50,7 +54,7 @@ module.exports = () => {
       }),
 
     ],
-
+    // Module rules for handling different file types
     module: {
 
       rules: [
