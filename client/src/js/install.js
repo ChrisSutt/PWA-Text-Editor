@@ -1,39 +1,34 @@
 const butInstall = document.getElementById("buttonInstall");
 
 window.addEventListener('beforeinstallprompt', (event) => {
-    console.log('Before Install Prompt Event:', event);
-    
+    console.log('hit')
+    console.log("event" + event)
     event.preventDefault();
+    // Store the triggered events
     window.deferredPrompt = event;
-    
-    console.log('Install Prompt Prevented. Deferred Prompt:', window.deferredPrompt);
-    
+
+    // Remove the hidden class from the button.
     butInstall.classList.toggle('hidden', false);
-    console.log('Button Install Element Visibility Toggled:', !butInstall.classList.contains('hidden'));
 });
 
 butInstall.addEventListener('click', async () => {
     const promptEvent = window.deferredPrompt;
-
+    // console.log(promptEvent)
     if (!promptEvent) {
-        console.warn('No Deferred Prompt available.');
         return;
     }
 
-    console.log('Button Install Clicked. Prompting Install:', promptEvent);
+    // Show prompt
     promptEvent.prompt();
 
     // Reset the deferred prompt variable, it can only be used once.
     window.deferredPrompt = null;
-    
-    console.log('Deferred Prompt Reset. Deferred Prompt:', window.deferredPrompt);
 
     butInstall.classList.toggle('hidden', true);
-    console.log('Button Install Element Visibility Toggled:', butInstall.classList.contains('hidden'));
 });
 
 window.addEventListener('appinstalled', (event) => {
-    console.log('App Installed Event:', event);
+    // Clear prompt
+    console.log('install hit')
     window.deferredPrompt = null;
-    console.log('Deferred Prompt Reset on App Installed. Deferred Prompt:', window.deferredPrompt);
-});
+}); 
